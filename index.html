@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>6問でわかる！あなたに合う"書く仕事"4タイプ診断</title>
+<style>
+  :root{
+    --bg:#fbf8f2; --ink:#2b2a27; --sub:#6b675f; --line:#e6e0d4; --card:#ffffff;
+    --mustard:#d9a83a; --terra:#d0714f; --blue:#6f8fb0; --sage:#7ea48b; --accent:#c9563c;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:"Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif;line-height:1.8;font-size:16px}
+  .wrap{max-width:640px;margin:0 auto;padding:28px 18px 60px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:26px 22px;margin-bottom:18px;box-shadow:0 2px 10px rgba(0,0,0,.04)}
+  h1{font-size:26px;line-height:1.4;margin:0 0 12px}
+  h2{font-size:20px;margin:0 0 10px}
+  h3{font-size:16px;margin:22px 0 6px;color:var(--accent)}
+  p{margin:0 0 12px}
+  .small{font-size:13px;color:var(--sub)}
+  .tag{display:inline-block;font-size:12px;padding:2px 10px;border-radius:999px;background:#f1ece2;color:var(--sub);margin-bottom:10px}
+  .btn{display:block;width:100%;border:0;border-radius:12px;padding:15px;font-size:17px;font-weight:700;cursor:pointer;background:var(--accent);color:#fff;margin-top:14px}
+  .btn.sub{background:#fff;color:var(--ink);border:2px solid var(--line);font-weight:500}
+  .opt{display:block;width:100%;text-align:left;border:2px solid var(--line);background:#fff;border-radius:12px;padding:14px 16px;font-size:16px;margin:10px 0;cursor:pointer;line-height:1.6;color:var(--ink)}
+  .opt:hover{border-color:var(--mustard)}
+  .opt b{display:inline-block;width:26px;color:var(--accent)}
+  .prog{height:6px;background:#eee7da;border-radius:99px;overflow:hidden;margin-bottom:16px}
+  .prog i{display:block;height:100%;background:var(--mustard);transition:width .3s}
+  .hide{display:none}
+  .result-head{border-radius:16px;padding:26px 22px;color:#fff;margin-bottom:18px}
+  .result-head .small{color:rgba(255,255,255,.85)}
+  .result-head h2{font-size:24px;color:#fff}
+  .ex{border-left:4px solid var(--line);padding:6px 14px;margin:10px 0;background:#fcfaf5;border-radius:0 8px 8px 0}
+  pre{white-space:pre-wrap;word-break:break-all;background:#2b2a27;color:#f6f2ea;padding:16px;border-radius:12px;font-size:13.5px;line-height:1.7;font-family:inherit}
+  .quad{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:12px 0}
+  .quad div{padding:12px 10px;border-radius:10px;font-size:13px;text-align:center;color:#fff;opacity:.45}
+  .quad div.on{opacity:1;outline:3px solid var(--ink)}
+  .axis{font-size:12px;color:var(--sub);text-align:center}
+  .list li{margin-bottom:6px}
+  .copy{font-size:13px;color:var(--sub);text-align:right;margin-top:-6px}
+  .copy button{background:#f1ece2;border:0;border-radius:8px;padding:6px 12px;cursor:pointer;font-size:13px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- 表紙 -->
+<section id="cover" class="card">
+  <span class="tag">所要時間：約5分</span>
+  <h1>6問でわかる！<br>あなたに合う"書く仕事"<br>4タイプ診断</h1>
+  <p>Kindle作家？ ライター？ 先生？ それとも、経験を肩書きにする専門家？</p>
+  <p>書く仕事は1つじゃありません。7つの収入源（セブンポケット）から、あなたが最初に開ける1つを見つけます。</p>
+  <p class="small">まよまよ先生 × 受講生1万人の実例データから設計</p>
+  <button class="btn" onclick="go('intro')">診断をはじめる</button>
+</section>
+
+<!-- はじめに -->
+<section id="intro" class="card hide">
+  <h2>はじめに</h2>
+  <p>「文章で稼ぐイメージが無い」<br>「副業で何が良いのか模索している」<br>「題材にしたいネタはあると思うが、それをどうすればいいのか分からない」</p>
+  <p>これ、私の体験会に来る前のみなさんが、アンケートに書いてくれた言葉です。</p>
+  <p>1万人を見てきてわかったことがあります。書く仕事で稼げるかどうかは、文章のうまさでは決まりません。<b>「自分に合った入口を選べたか」で決まります。</b></p>
+  <p>コツコツ一人で書くのが好きな人が、やり取りの多い仕事を選んで疲れてしまう。人と話すと元気が出る人が、一人で黙々と本を書こうとして止まる。どれも「能力不足」ではなく「配置ミス」です。</p>
+  <p>前半3問は「お金の入り方」、後半3問は「働き方」の質問です。近いほうを1つ選んでください。</p>
+  <button class="btn" onclick="startQuiz()">Q1へ</button>
+</section>
+
+<!-- 質問 -->
+<section id="quiz" class="card hide">
+  <div class="prog"><i id="bar" style="width:0%"></i></div>
+  <span class="tag" id="qno"></span>
+  <h2 id="qtext"></h2>
+  <div id="opts"></div>
+</section>
+
+<!-- 結果 -->
+<section id="result" class="hide">
+  <div class="result-head" id="rhead">
+    <p class="small">あなたの入口は……</p>
+    <h2 id="rname"></h2>
+    <p id="rsub" class="small"></p>
+  </div>
+
+  <div class="card">
+    <p class="axis">仕組みで入る（ストック）</p>
+    <div class="quad" id="quad">
+      <div style="background:var(--sage)" data-t="1">① しずかな作家<br>Kindle作家</div>
+      <div style="background:var(--terra)" data-t="4">④ 経験が肩書きになる専門家<br>本業×出版・教材</div>
+      <div style="background:var(--blue)" data-t="2">② 腕で稼ぐライター<br>執筆代行・案件</div>
+      <div style="background:var(--mustard)" data-t="3">③ 教える先生<br>講座・コンサル</div>
+    </div>
+    <p class="axis">すぐお金になる（フロー）　｜　左：一人でコツコツ　右：人と関わる</p>
+  </div>
+
+  <div class="card" id="rbody"></div>
+
+  <div class="card">
+    <h2>Xでシェアする</h2>
+    <p class="small">診断を終えたら、ぜひ投稿してください。「書きたいのに何から始めればいいか分からずにいる仲間」にも、そっと渡してあげてください。</p>
+    <pre id="share"></pre>
+    <div class="copy"><button onclick="copyText('share')">コピー</button></div>
+    <button class="btn sub" id="xbtn">Xで投稿する</button>
+  </div>
+
+  <div class="card">
+    <h2>無料体験会のご案内</h2>
+    <p>1つの収入源だけに頼るのは、この時代いちばん危険です。でも、全部を労働収入にすると体を壊します（私は何度も壊しました）。</p>
+    <p>だから、すぐお金になる入口と、仕組みで入る入口を、半々で持つ。その最初の1つを、AIと文章で作る。それが書王でお伝えしていることです。</p>
+    <p><b>書く力は、一度身につければ一生ものです。</b></p>
+    <p>申し込まなかった場合 → 「私に合う副業は何だろう」と迷ったまま、1文字も進んでいない<br>申し込んだ場合 → 自分の入口が決まり、最初の1本（1冊・1案件）を書き始めている</p>
+    <p>参加費：<b>無料</b>　あなたに必要な投資は、2時間の時間だけです。</p>
+    <a class="btn" style="text-align:center;text-decoration:none" href="#" id="cta">無料体験会の詳細を見る</a>
+    <p class="small" style="margin-top:8px">※体験会URLは4期プロモの日程確定後に差し替え</p>
+    <button class="btn sub" onclick="location.reload()">もう一度診断する</button>
+  </div>
+</section>
+
+</div>
+
+<script>
+const Q=[
+ {q:"3ヶ月後、どちらのほうがうれしいですか？",a:["がんばった分が、すぐ1万円になっている","まだ0円でも、来年から毎月入ってくる仕組みの芽ができている"],k:["A","B"]},
+ {q:"これまでの仕事で、好きだったのは？",a:["目の前の頼まれごとを片づけて「ありがとう」と言われること","一度作ったものが、あとあとまで役に立ち続けること"],k:["A","B"]},
+ {q:"正直、いちばん避けたいのは？",a:["半年間、タダ働きのように感じること","毎月ゼロから仕事を探し直すこと"],k:["A","B"]},
+ {q:"休みの日、元気が戻るのは？",a:["一人で黙々と、何かを作っているとき","誰かとしゃべったり、相談にのったりしているとき"],k:["C","D"]},
+ {q:"人からよく言われるのは？",a:["「コツコツ続けられてすごい」「集中力あるね」","「話しやすい」「教えるのが上手」"],k:["C","D"]},
+ {q:"書く仕事で、わくわくするのはどちらの場面？",a:["自分の名前で出した本や記事が、知らない誰かに届く","目の前の人が「あなたのおかげで」と言ってくれる"],k:["C","D"]},
+];
+
+const T={
+1:{name:"しずかな作家タイプ",sub:"Kindle作家｜仕組みで入る × 一人でコツコツ",color:"var(--sage)",
+ body:`<p>「派手なことはしたくない。でも、自分の名前で何かを残したい」</p><p>そんなあなたに向いているのは、<b>Kindle作家</b>です。一人でコツコツ書ける力は、この道ではそのまま武器になります。一度書いた本は、あなたが寝ている間も働いてくれます。</p>
+<h3>この道の収入源</h3><p>セブンポケットの「①印税」と「②シリーズ連載」。同じテーマで2冊目、3冊目と重ねて、そのジャンルの第一人者になっていく道です。</p>
+<h3>必要な力</h3><p>続ける力、自分の経験を1冊分にまとめる力（AIが手伝います）</p>
+<h3>受講生の実例</h3>
+<div class="ex">元アパレル販売員の七海むぎさん。SNSも営業も苦手でしたが、電子書籍を出したら<b>1冊あたりの印税が100万円超</b>、Amazon総合11位。今は本業を週3勤務に。</div>
+<div class="ex">パソコンのログイン画面もわからなかった70代のリンさんは、<b>50日連続で出版し、KADOKAWAから商業出版</b>まで。</div>
+<div class="ex">「私なんか…」が口ぐせだった50代のさんままさんは、<b>1日15分だけ書いて</b>Kindle出版。</div>
+<h3>あなたの処方箋</h3><p>まず、あなたの中にある「本1冊分のテーマ」を見つけましょう。書き始めなくていい。テーマの名前をつけるところからです。</p>
+<h3>タイプ①専用AIプロンプト「本1冊分のテーマ発見」</h3>
+<pre id="pr">私はKindle作家をめざす初心者です。
+私の経験から「本1冊分になるテーマ」を見つけてください。
+以下の質問を1つずつ私に聞いてください。答えたら次へ進んでください。
+
+質問1：10年以上続けていること、または長く積み重ねてきた経験は何ですか？
+質問2：人から「それ、どうやってるの？」と聞かれることは何ですか？
+質問3：これまででいちばん苦労して、乗り越えたことは何ですか？
+
+全部答えたら、本のテーマ候補を3つ、それぞれ「読者はどんな人か」「仮タイトル」つきで提案してください。
+最後に、私の経験のどこが「本にする価値がある」と思ったかを、ひとことで教えてください。</pre>
+<div class="copy"><button onclick="copyText('pr')">プロンプトをコピー</button></div>
+<h3>次のステップ</h3><p>テーマが見つかったら、次は「本の形にする方法」です。無料体験会では、テーマ→目次→文章の土台が<b>ラクラク出版くん</b>で数分でできる実演をお見せします。</p>`},
+2:{name:"腕で稼ぐライタータイプ",sub:"執筆代行・案件｜すぐお金になる × 一人でコツコツ",color:"var(--blue)",
+ body:`<p>「まず、確実に収入がほしい。仕組みを作るのは、それからでいい」</p><p>そんなあなたに向いているのは、<b>ライター（執筆代行）</b>です。頼まれたものを、期日どおりに仕上げて、感謝されて、お金になる。一人で集中できる人ほど、この道は速いです。</p>
+<h3>この道の収入源</h3><p>セブンポケットの「④ライター案件」。7つの中で、いちばん早くお金になる入口です。</p>
+<h3>必要な力</h3><p>読む人に合わせて書く力、期日を守る力（AIを使えば執筆時間は大きく縮みます）</p>
+<h3>受講生の実例</h3>
+<div class="ex">3歳と6歳のお子さんを育てながら在宅で働くあゆぴこさんは、<b>文字単価1円</b>から抜け出せずにいました。学んだあとは<b>月収45万円</b>。時給に直すと5,000円です。</div>
+<div class="ex">元専業主婦のひのとさん（50代）は、受講<b>1ヶ月で初案件</b>を受注し、そのまま<b>年間契約</b>に。執筆時間は1週間から1時間になりました。</div>
+<h3>あなたの処方箋</h3><p>まず「あなたの経験を、応募の文章に変える」ことから。実績ゼロでも、経験は書けます。</p>
+<h3>タイプ②専用AIプロンプト「経験を応募文に変える」</h3>
+<pre id="pr">私はライターの仕事を始めたい初心者です。実績はまだありません。
+私の経験を「応募の文章」に変えてください。
+
+これまでの仕事・経験：（記入）
+くわしい分野・長くやってきたこと：（記入）
+書いてみたいジャンル：（記入）
+
+以下の手順でお願いします。
+1. 私の経験から「このジャンルなら書ける」と言える根拠を3つ見つける
+2. その根拠を使って、300字の応募文を書く（うそは書かない・経験だけで書く）
+3. 応募文の中で、選ぶ側がいちばん安心する1文はどれかを教える
+最後に、私の経験のどこが「ライター向き」だと思ったかを、ひとことで教えてください。</pre>
+<div class="copy"><button onclick="copyText('pr')">プロンプトをコピー</button></div>
+<h3>次のステップ</h3><p>応募文ができたら、次は「AIで速く・質を落とさずに書く方法」です。無料体験会では、1本の記事がAIとの分業で仕上がるまでを実演します。</p>`},
+3:{name:"教える先生タイプ",sub:"講座・コンサル・出版プロデュース｜すぐお金になる × 人と関わる",color:"var(--mustard)",
+ body:`<p>「あなたに話すと頭が整理される」と言われたことはありませんか。</p><p>そんなあなたに向いているのは、<b>教える仕事</b>です。講座、相談にのる仕事、そして「本を出したい人」の出版を手伝う出版プロデュース。自分が書くより、人の中にあるものを引き出すほうが得意。それは書く仕事の中で、はっきりした強みです。</p>
+<h3>この道の収入源</h3><p>セブンポケットの「⑤出版プロデュース」と「⑥講座・コンサル」。7つの中でいちばん単価が高い入口です。</p>
+<h3>必要な力</h3><p>聞く力、相手の話を整理する力、伝える力（教える中身はあなたの経験でいい）</p>
+<h3>受講生の実例</h3>
+<div class="ex">2児のママの須山ゆずさんは、クラウドソーシング100件以上で<b>月5万円</b>でした。学んだあとは<b>月収20万円超</b>。自分で<b>15万円の講座</b>を開き、クライアントの本はAmazon1位に。</div>
+<div class="ex">メーカー研究職で育休中だったなつさんは、副業未経験から出版サポートを始めて<b>2ヶ月で売上40万円</b>。</div>
+<div class="ex">主婦だったももんかさん（50代）は、今はNHKカルチャーセンターの講師です。</div>
+<h3>あなたの処方箋</h3><p>身近な1人の話を聞いて、その人の経験を「本の目次」にしてみましょう。教える仕事の練習は、ここから始まります。</p>
+<h3>タイプ③専用AIプロンプト「人の経験を目次に変える」</h3>
+<pre id="pr">私は「教える仕事」や「出版のお手伝い」をめざす初心者です。
+身近な人の経験を1冊の本の目次にする練習をします。
+
+本にしたい人：（例）飲食店を20年続けている父
+その人の印象的な経験・強み：（記入）
+
+以下の手順でお願いします。
+1. この人の経験から作れる本のテーマ案を3つ提案する
+2. 私が選んだテーマで「章立て（5〜7章）」を作る
+3. 各章で本人に聞くべき質問を3つずつ作る
+最後に、私の見方のどこが「人の話を引き出す力」になっているかを、ひとことで教えてください。</pre>
+<div class="copy"><button onclick="copyText('pr')">プロンプトをコピー</button></div>
+<h3>次のステップ</h3><p>目次が作れたら、次は「人の経験を売れる本に変える設計図」です。無料体験会でお見せします。</p>`},
+4:{name:"経験が肩書きになる専門家タイプ",sub:"本業×出版・教材｜仕組みで入る × 人と関わる",color:"var(--terra)",
+ body:`<p>「私には、今の仕事しかない」</p><p>そう思っているあなたへ。違います。その仕事こそが、いちばん強い材料です。介護、看護、美容、事務、保育、営業……何年も続けてきた仕事には、その現場にいた人にしか書けないことがあります。それを本や教材にすると、<b>あなたに「専門家」という肩書きがつきます</b>。</p>
+<h3>この道の収入源</h3><p>セブンポケットの「③オンライン教材」と「⑦本業ブースト」。本を出して専門家の位置を取り、本業の単価アップ・監修・講演へ広げていく道です。</p>
+<h3>必要な力</h3><p>自分の当たり前を言葉にする力（ここがいちばん難しいので、AIに引き出してもらいます）</p>
+<h3>受講生の実例</h3>
+<div class="ex">ケアマネジャー歴約20年のせつなをさんは、ライティング完全未経験。自分の専門を言葉にしたら<b>活動開始2週間で3件受注</b>。今は<b>時間単価5万円</b>、電子書籍はAmazon4部門で1位。</div>
+<div class="ex">美容師15年のはがまるさんは、今は美容記事の監修で<b>文字単価33円</b>。本業のお店の販売も<b>前年比約170%</b>に。</div>
+<div class="ex">看護師歴31年のまりまりさん（50代）は、ChatGPTを開いてもすぐ閉じてしまう状態から、<b>Kindle2冊</b>を出版。</div>
+<h3>あなたの処方箋</h3><p>あなたの「当たり前」を、外の人が驚く言葉に変えましょう。専門家の第一歩は、自分の当たり前に気づくことです。</p>
+<h3>タイプ④専用AIプロンプト「当たり前を専門知識に変える」</h3>
+<pre id="pr">私は自分の仕事の経験を、本や教材にしたい初心者です。
+私の「当たり前」の中から、外の人には価値がある知識を見つけてください。
+
+私の仕事・経験年数：（例）介護職・15年
+毎日やっていること：（記入）
+新人がよくつまずくこと：（記入）
+お客さん（利用者・患者・お店のお客さん）からよく聞かれること：（記入）
+
+以下の手順でお願いします。
+1. 外の人が「知らなかった」と言いそうな知識を5つ挙げる
+2. その中から、本や教材のテーマになるものを1つ選び、仮タイトルをつける
+3. 私につけられる「肩書き」の案を3つ出す（本のテーマ×仕事の経験の掛け算で）
+最後に、私の経験のどこが「専門家として書く価値がある」と思ったかを、ひとことで教えてください。</pre>
+<div class="copy"><button onclick="copyText('pr')">プロンプトをコピー</button></div>
+<h3>次のステップ</h3><p>テーマと肩書きが見えたら、次は「本業を武器にして本を出す方法」です。無料体験会でお見せします。</p>`}
+};
+
+let i=0, ans=[];
+function go(id){["cover","intro","quiz","result"].forEach(x=>document.getElementById(x).classList.add("hide"));document.getElementById(id).classList.remove("hide");window.scrollTo(0,0);}
+function startQuiz(){i=0;ans=[];go("quiz");render();}
+function render(){
+  const q=Q[i];
+  document.getElementById("bar").style.width=(i/Q.length*100)+"%";
+  document.getElementById("qno").textContent="Q"+(i+1)+" / 6";
+  document.getElementById("qtext").textContent=q.q;
+  document.getElementById("opts").innerHTML=q.a.map((t,j)=>`<button class="opt" onclick="pick('${q.k[j]}')"><b>${q.k[j]}.</b>${t}</button>`).join("");
+}
+function pick(k){ans.push(k);i++; if(i<Q.length){render();}else{finish();}}
+function finish(){
+  const c=x=>ans.filter(a=>a===x).length;
+  let money = c("A")>c("B")?"A":c("B")>c("A")?"B":ans[2];
+  let style = c("C")>c("D")?"C":c("D")>c("C")?"D":ans[5];
+  const t = money==="B"&&style==="C"?1: money==="A"&&style==="C"?2: money==="A"&&style==="D"?3:4;
+  const r=T[t];
+  document.getElementById("rhead").style.background=r.color;
+  document.getElementById("rname").textContent="タイプ"+"①②③④"[t-1]+" "+r.name;
+  document.getElementById("rsub").textContent=r.sub;
+  document.getElementById("rbody").innerHTML=r.body;
+  document.querySelectorAll("#quad div").forEach(d=>d.classList.toggle("on",d.dataset.t==t));
+  const share=`まよまよ先生の「書く仕事4タイプ診断」をやってみました。
+
+私は「${r.name}」でした！
+
+　しずかな作家タイプ → Kindle作家向き
+　腕で稼ぐライタータイプ → 執筆代行・案件向き
+　教える先生タイプ → 講座・出版プロデュース向き
+　経験が肩書きになる専門家タイプ → 本業×出版向き
+
+自分の入口、見つけた！ #書く仕事診断`;
+  document.getElementById("share").textContent=share;
+  document.getElementById("xbtn").onclick=()=>window.open("https://x.com/intent/post?text="+encodeURIComponent(share),"_blank");
+  go("result");
+}
+function copyText(id){navigator.clipboard.writeText(document.getElementById(id).textContent).then(()=>alert("コピーしました"));}
+</script>
+</body>
+</html>
