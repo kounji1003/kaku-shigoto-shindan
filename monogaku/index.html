@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>6問でわかる！あなたに合う"書く仕事"4タイプ診断</title>
+<style>
+  :root{
+    --bg:#fbf8f2; --ink:#2b2a27; --sub:#6b675f; --line:#e6e0d4; --card:#ffffff;
+    --mustard:#d9a83a; --terra:#d0714f; --blue:#6f8fb0; --sage:#7ea48b; --accent:#c9563c;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:"Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif;line-height:1.8;font-size:16px}
+  .wrap{max-width:640px;margin:0 auto;padding:28px 18px 60px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:26px 22px;margin-bottom:18px;box-shadow:0 2px 10px rgba(0,0,0,.04)}
+  h1{font-size:26px;line-height:1.4;margin:0 0 12px}
+  h2{font-size:20px;margin:0 0 10px}
+  h3{font-size:16px;margin:22px 0 6px;color:var(--accent)}
+  p{margin:0 0 12px}
+  .small{font-size:13px;color:var(--sub)}
+  .tag{display:inline-block;font-size:12px;padding:2px 10px;border-radius:999px;background:#f1ece2;color:var(--sub);margin-bottom:10px}
+  .btn{display:block;width:100%;border:0;border-radius:12px;padding:15px;font-size:17px;font-weight:700;cursor:pointer;background:var(--accent);color:#fff;margin-top:14px}
+  .btn.sub{background:#fff;color:var(--ink);border:2px solid var(--line);font-weight:500}
+  .opt{display:block;width:100%;text-align:left;border:2px solid var(--line);background:#fff;border-radius:12px;padding:14px 16px;font-size:16px;margin:10px 0;cursor:pointer;line-height:1.6;color:var(--ink)}
+  .opt:hover{border-color:var(--mustard)}
+  .opt b{display:inline-block;width:26px;color:var(--accent)}
+  .prog{height:6px;background:#eee7da;border-radius:99px;overflow:hidden;margin-bottom:16px}
+  .prog i{display:block;height:100%;background:var(--mustard);transition:width .3s}
+  .hide{display:none}
+  .result-head{border-radius:16px;padding:26px 22px;color:#fff;margin-bottom:18px}
+  .result-head .small{color:rgba(255,255,255,.85)}
+  .result-head h2{font-size:24px;color:#fff}
+  .ex{border-left:4px solid var(--line);padding:6px 14px;margin:10px 0;background:#fcfaf5;border-radius:0 8px 8px 0}
+  pre{white-space:pre-wrap;word-break:break-all;background:#2b2a27;color:#f6f2ea;padding:16px;border-radius:12px;font-size:13.5px;line-height:1.7;font-family:inherit}
+  .quad{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:12px 0}
+  .quad div{padding:12px 10px;border-radius:10px;font-size:13px;text-align:center;color:#fff;opacity:.45}
+  .quad div.on{opacity:1;outline:3px solid var(--ink)}
+  .axis{font-size:12px;color:var(--sub);text-align:center}
+  .list li{margin-bottom:6px}
+  .copy{font-size:13px;color:var(--sub);text-align:right;margin-top:-6px}
+  .copy button{background:#f1ece2;border:0;border-radius:8px;padding:6px 12px;cursor:pointer;font-size:13px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- 表紙 -->
+<section id="cover" class="card">
+  <span class="tag">ものかき大学 会員限定</span>
+  <h1>ものがく生用<br>書く仕事4タイプ診断<br>＋ロードマップ</h1>
+  <p>Kindle作家？ ライター？ 先生？ それとも、経験を肩書きにする専門家？</p>
+  <p>書く仕事は1つじゃありません。タイプごとに「どの講座を、どの順で見ればいいか」5ステップで出します。迷子にならないための地図です。</p>
+  <p class="small">まよまよ先生 × 受講生1万人の実例データから設計</p>
+  <button class="btn" onclick="go('intro')">診断をはじめる</button>
+</section>
+
+<!-- はじめに -->
+<section id="intro" class="card hide">
+  <h2>はじめに</h2>
+  <p>書く仕事で稼げるかは、文章のうまさでは決まりません。1万人を見てわかった答えは「自分に合った入口を選べたか」。うまくいかないのは能力不足ではなく配置ミス。6問で、あなたの入口を見つけます。</p>
+  <p class="small">前半3問は「お金の入り方」、後半3問は「働き方」。近いほうを1つ選んでください。</p>
+  <button class="btn" onclick="startQuiz()">質問へ進む</button>
+</section>
+
+<!-- 質問 -->
+<section id="quiz" class="card hide">
+  <div class="prog"><i id="bar" style="width:0%"></i></div>
+  <span class="tag" id="qno"></span>
+  <h2 id="qtext"></h2>
+  <div id="opts"></div>
+</section>
+
+<!-- 結果 -->
+<section id="result" class="hide">
+  <div class="result-head" id="rhead">
+    <p class="small">あなたの入口は……</p>
+    <h2 id="rname"></h2>
+    <p id="rsub" class="small"></p>
+  </div>
+
+  <div class="card">
+    <p class="axis">仕組みで入る（ストック）</p>
+    <div class="quad" id="quad">
+      <div style="background:var(--sage)" data-t="1">① 印税作家<br>Kindle作家</div>
+      <div style="background:var(--terra)" data-t="4">④ 本を持つ専門家<br>本業×出版・教材</div>
+      <div style="background:var(--blue)" data-t="2">② 依頼が来るライター<br>執筆代行・案件</div>
+      <div style="background:var(--mustard)" data-t="3">③ 教える先生<br>講座・コンサル</div>
+    </div>
+    <p class="axis">すぐお金になる（フロー）　｜　左：一人でコツコツ　右：人と関わる</p>
+  </div>
+
+  <div class="card" id="rbody"></div>
+
+  <div class="card">
+    <h2>Xでシェアする</h2>
+    <p class="small">診断を終えたら、ぜひ投稿してください。「書きたいのに何から始めればいいか分からずにいる仲間」にも、そっと渡してあげてください。</p>
+    <pre id="share"></pre>
+    <div class="copy"><button onclick="copyText('share')">コピー</button></div>
+    <button class="btn sub" id="xbtn">Xで投稿する</button>
+  </div>
+
+  <div class="card">
+    <h2>無料体験会のご案内</h2>
+    <p>1つの収入源だけに頼るのは、この時代いちばん危険です。でも、全部を労働収入にすると体を壊します（私は何度も壊しました）。</p>
+    <p>だから、すぐお金になる入口と、仕組みで入る入口を、半々で持つ。その最初の1つを、AIと文章で作る。それが書王でお伝えしていることです。</p>
+    <p><b>書く力は、一度身につければ一生ものです。</b></p>
+    <p>申し込まなかった場合 → 「私に合う副業は何だろう」と迷ったまま、1文字も進んでいない<br>申し込んだ場合 → 自分の入口が決まり、最初の1本（1冊・1案件）を書き始めている</p>
+    <p>参加費：<b>無料</b>　あなたに必要な投資は、2時間の時間だけです。</p>
+    <a class="btn" style="text-align:center;text-decoration:none" href="https://utage-system.com/members/m6D6Wof0zNuk/home" id="cta">会員サイトを開く</a>
+    <p class="small" style="margin-top:8px">※体験会URLは4期プロモの日程確定後に差し替え</p>
+    <button class="btn sub" onclick="location.reload()">もう一度診断する</button>
+  </div>
+</section>
+
+</div>
+
+<script>
+const Q=[
+ {q:"3ヶ月後、どちらのほうがうれしいですか？",a:["がんばった分が、すぐ1万円になっている","まだ0円でも、来年から毎月入ってくる仕組みの芽ができている"],k:["A","B"]},
+ {q:"これまでの仕事で、好きだったのは？",a:["目の前の頼まれごとを片づけて「ありがとう」と言われること","一度作ったものが、あとあとまで役に立ち続けること"],k:["A","B"]},
+ {q:"正直、いちばん避けたいのは？",a:["半年間、タダ働きのように感じること","毎月ゼロから仕事を探し直すこと"],k:["A","B"]},
+ {q:"休みの日、元気が戻るのは？",a:["一人で黙々と、何かを作っているとき","誰かとしゃべったり、相談にのったりしているとき"],k:["C","D"]},
+ {q:"人からよく言われるのは？",a:["「コツコツ続けられてすごい」「集中力あるね」","「話しやすい」「教えるのが上手」"],k:["C","D"]},
+ {q:"書く仕事で、わくわくするのはどちらの場面？",a:["自分の名前で出した本や記事が、知らない誰かに届く","目の前の人が「あなたのおかげで」と言ってくれる"],k:["C","D"]},
+];
+
+const T={
+1:{name:"印税作家タイプ",sub:"Kindle作家｜仕組みで入る × 一人でコツコツ",color:"var(--sage)",
+ body:`<h3>あなたのロードマップ（5ステップ）</h3><div class="ex"><b>STEP 1｜土台を知る</b><br><a href="https://utage-system.com/members/m6D6Wof0zNuk/course/Su1UQwCsl0v1" target="_blank">ものかき大学校の歩き方</a> / <a href="https://utage-system.com/members/m6D6Wof0zNuk/course/Y4uWl1uUEfW9" target="_blank">まよ式セブンポケットシステム</a><br><span class="small">まず全体像。ポケット①印税②シリーズがあなたの道</span></div><div class="ex"><b>STEP 2｜本のテーマと章立てを決める</b><br><a href="https://utage-system.com/members/m6D6Wof0zNuk/course/vVPbQ0kytlUV" target="_blank">【第3回本講義】電子書籍（コンセプト・章立て）</a> / <a href="https://utage-system.com/members/m6D6Wof0zNuk/course/nNElm8hJULCn" target="_blank">ストーリーテリングの基礎</a><br><span class="small">診断の専用プロンプトで出したテーマを目次にする</span></div><div class="ex"><b>STEP 3｜1冊目を書き切る</b><br><a href="https://utage-system.com/members/m6D6Wof0zNuk/course/XIXcmMG1FOwh" target="_blank">【第4回本講義】電子書籍（執筆）</a> / <a href="https://utage-system.com/members/m6D6Wof0zNuk/course/NZszZDXnOgX5" target="_blank">【Kindleコース】電子書籍・合宿・ストーリー</a><br><span class="small">1日15分でOK。合宿回のアーカイブを併走に</span></div><div class="ex"><b>STEP 4｜出版する</b><br><a href="https://utage-system.com/members/m6D6Wof0zNuk/course/XrVbdEDPUv8r" target="_blank">【Kindleコース】KDP登録方法</a> / <a href="https://w1617260106-4fq320048.slack.com/archives/C05ADL3AUH5" target="_blank">サポートch 10-4_電子書籍（Slack）</a><br><span class="small">KDP登録でつまずいたらサポートchへ</span></div><div class="ex"><b>STEP 5｜2冊目・印税を育てる</b><br><a href="https://utage-system.com/members/m6D6Wof0zNuk/course/ErWz2fhDL4IK" target="_blank">【第5回本講義】収益化の方法</a> / <a href="https://utage-system.com/members/m6D6Wof0zNuk/course/4nFSl3okVZMt" target="_blank">【Kindleコース】E-bookライター</a><br><span class="small">同じテーマで2冊目。シリーズ化で第一人者へ</span></div><p class="small">1ステップにつき講座は最大2本。今月はSTEP 1だけでOKです。</p>`},
+2:{name:"依頼が来るライタータイプ",sub:"執筆代行・案件｜すぐお金になる × 一人でコツコツ",color:"var(--blue)",
+ body:`<h3>あなたのロードマップ（5ステップ）</h3><div class="ex"><b>STEP 1｜書く型を身につける</b><br><a href="https://utage-system.com/members/m6D6Wof0zNuk/course/UEWHotEWPozg" target="_blank">ライター｜ライティング初級</a> / <a href="https://utage-system.com/members/m6D6Wof0zNuk/course/8RT9Hhu9Ijvt" target="_blank">AIライティング超入門講座（全4回）</a><br><span class="small">AIとの分業で執筆時間を縮める土台</span></div><div class="ex"><b>STEP 2｜選ばれるサンプル記事を作る</b><br><a href="https://utage-system.com/members/m6D6Wof0zNuk/course/M84CisIx6otx" target="_blank">案件で選ばれる記事のつくり方｜AI×SEOサンプル記事作成講座</a><br><span class="small">実績ゼロでも「これが書けます」を見せられる</span></div><div class="ex"><b>STEP 3｜応募して受注する</b><br><a href="https://utage-system.com/members/m6D6Wof0zNuk/course/w86HisZVKd28" target="_blank">仕事が途切れなくなるポートフォリオ×案件受注実践講座（全3回）</a> / <a href="https://utage-system.com/members/m6D6Wof0zNuk/course/ZvPeVS8n4dSW" target="_blank">はじめてのAIライター副業講座</a><br><span class="small">診断の専用プロンプトで作った応募文をここで磨く</span></div><div class="ex"><b>STEP 4｜単価と幅を上げる</b><br><a href="https://utage-system.com/members/m6D6Wof0zNuk/course/QZIMjinlTXwb" target="_blank">ライター｜ライティング中級</a> / <a href="https://utage-system.com/members/m6D6Wof0zNuk/course/hKwDrIJHmFq7" target="_blank">はじめての取材＆インタビューライティング講座（全3回）</a><br><span class="small">取材ができると単価が変わる</span></div><div class="ex"><b>STEP 5｜途切れない仕組みへ</b><br><a href="https://utage-system.com/members/m6D6Wof0zNuk/course/HOXkmF2Aythk" target="_blank">ライター｜ライティング上級</a> / <a href="https://w1617260106-4fq320048.slack.com/archives/C05AWK6P79A" target="_blank">サポートch 10-7_ライターゼロイチ（Slack）</a><br><span class="small">年間契約・指名受注を目指す</span></div><p class="small">1ステップにつき講座は最大2本。今月はSTEP 1だけでOKです。</p>`},
+3:{name:"教える先生タイプ",sub:"講座・コンサル・出版プロデュース｜すぐお金になる × 人と関わる",color:"var(--mustard)",
+ body:`<h3>あなたのロードマップ（5ステップ）</h3><div class="ex"><b>STEP 1｜売れる仕組みの全体像</b><br><a href="https://utage-system.com/members/m6D6Wof0zNuk/course/Y4uWl1uUEfW9" target="_blank">まよ式セブンポケットシステム</a> / <a href="https://utage-system.com/members/m6D6Wof0zNuk/course/WPWBp4p32rrM" target="_blank">書くためのマーケティング講座@まよ先生</a><br><span class="small">⑤出版プロデュース⑥講座・コンサルの位置を知る</span></div><div class="ex"><b>STEP 2｜教える中身を言葉にする</b><br><a href="https://utage-system.com/members/m6D6Wof0zNuk/course/lkOetncDTtt0" target="_blank">【まよコピ】コピーライティング</a> / <a href="https://utage-system.com/members/m6D6Wof0zNuk/course/HJJen5Pj2ueI" target="_blank">【ものがく】AIコピーライティング講座</a><br><span class="small">診断の専用プロンプトで作った「人の経験の目次」を商品にする</span></div><div class="ex"><b>STEP 3｜小さく売ってみる</b><br><a href="https://utage-system.com/members/m6D6Wof0zNuk/course/0eL5HoUouND7" target="_blank">はじめてのストアカ講座（全4回）</a> / <a href="https://utage-system.com/members/m6D6Wof0zNuk/course/QFlhZTCiZUr0" target="_blank">【第6回本講義】セールスライティング（LP）</a><br><span class="small">まず1,000円の講座で1人に教える</span></div><div class="ex"><b>STEP 4｜講師力を鍛える</b><br><a href="https://utage-system.com/members/m6D6Wof0zNuk/course/fL3SBEwtl3La" target="_blank">講師向け鬼特訓講座</a> / <a href="https://utage-system.com/members/m6D6Wof0zNuk/course/rTzMI6Kgqdj4" target="_blank">書くためのマーケティング道場（全6回）</a><br><span class="small">教え方と集め方を同時に</span></div><div class="ex"><b>STEP 5｜継続の場に出る</b><br><a href="https://utage-system.com/members/m6D6Wof0zNuk/home" target="_blank">まよコン（毎週日曜8:30〜）</a> / <a href="https://utage-system.com/members/m6D6Wof0zNuk/course/ebnUYMn9YL5V" target="_blank">【2026】まよまよグルコン</a><br><span class="small">毎週の場で発表→添削→交流。成果報告で次の生徒が来る</span></div><p class="small">1ステップにつき講座は最大2本。今月はSTEP 1だけでOKです。</p>`},
+4:{name:"本を持つ専門家タイプ",sub:"本業×出版・教材｜仕組みで入る × 人と関わる",color:"var(--terra)",
+ body:`<h3>あなたのロードマップ（5ステップ）</h3><div class="ex"><b>STEP 1｜本業を武器にする視点</b><br><a href="https://utage-system.com/members/m6D6Wof0zNuk/course/Y4uWl1uUEfW9" target="_blank">まよ式セブンポケットシステム</a> / <a href="https://utage-system.com/members/m6D6Wof0zNuk/course/Su1UQwCsl0v1" target="_blank">ものかき大学校の歩き方</a><br><span class="small">③オンライン教材⑦本業ブーストが道</span></div><div class="ex"><b>STEP 2｜「当たり前」を本のテーマに</b><br><a href="https://utage-system.com/members/m6D6Wof0zNuk/course/vVPbQ0kytlUV" target="_blank">【第3回本講義】電子書籍（コンセプト・章立て）</a> / <a href="https://utage-system.com/members/m6D6Wof0zNuk/course/nNElm8hJULCn" target="_blank">ストーリーテリングの基礎</a><br><span class="small">診断の専用プロンプトで出した肩書き×テーマを章立てに</span></div><div class="ex"><b>STEP 3｜名刺代わりの1冊を出す</b><br><a href="https://utage-system.com/members/m6D6Wof0zNuk/course/XIXcmMG1FOwh" target="_blank">【第4回本講義】電子書籍（執筆）</a> / <a href="https://utage-system.com/members/m6D6Wof0zNuk/course/XrVbdEDPUv8r" target="_blank">【Kindleコース】KDP登録方法</a><br><span class="small">完璧より先に出す。本業の実例が中身</span></div><div class="ex"><b>STEP 4｜教材・noteで広げる</b><br><a href="https://utage-system.com/members/m6D6Wof0zNuk/course/yEte1QzeXj2Q" target="_blank">有料note完全マスター講座</a> / <a href="https://utage-system.com/members/m6D6Wof0zNuk/course/Mh5xEqEIggOh" target="_blank">noteのプロによる完全攻略ロードマップ講座</a><br><span class="small">本→教材で「仕組みで入る」を作る</span></div><div class="ex"><b>STEP 5｜専門家として単価を上げる</b><br><a href="https://utage-system.com/members/m6D6Wof0zNuk/course/WPWBp4p32rrM" target="_blank">書くためのマーケティング講座@まよ先生</a> / <a href="https://utage-system.com/members/m6D6Wof0zNuk/course/BKpI2G8adpYv" target="_blank">はじめてのビザスク講座</a><br><span class="small">監修・講演・相談へ。本が営業ツールになる</span></div><p class="small">1ステップにつき講座は最大2本。今月はSTEP 1だけでOKです。</p>`}
+};
+
+let i=0, ans=[];
+function go(id){["cover","intro","quiz","result"].forEach(x=>document.getElementById(x).classList.add("hide"));document.getElementById(id).classList.remove("hide");window.scrollTo(0,0);}
+function startQuiz(){i=0;ans=[];go("quiz");render();}
+function render(){
+  const q=Q[i];
+  document.getElementById("bar").style.width=(i/Q.length*100)+"%";
+  document.getElementById("qno").textContent="Q"+(i+1)+" / 6";
+  document.getElementById("qtext").textContent=q.q;
+  document.getElementById("opts").innerHTML=q.a.map((t,j)=>`<button class="opt" onclick="pick('${q.k[j]}')"><b>${q.k[j]}.</b>${t}</button>`).join("");
+}
+function pick(k){ans.push(k);i++; if(i<Q.length){render();}else{finish();}}
+function finish(){
+  const c=x=>ans.filter(a=>a===x).length;
+  let money = c("A")>c("B")?"A":c("B")>c("A")?"B":ans[2];
+  let style = c("C")>c("D")?"C":c("D")>c("C")?"D":ans[5];
+  const t = money==="B"&&style==="C"?1: money==="A"&&style==="C"?2: money==="A"&&style==="D"?3:4;
+  const r=T[t];
+  document.getElementById("rhead").style.background=r.color;
+  document.getElementById("rname").textContent="タイプ"+"①②③④"[t-1]+" "+r.name;
+  document.getElementById("rsub").textContent=r.sub;
+  document.getElementById("rbody").innerHTML=r.body;
+  document.querySelectorAll("#quad div").forEach(d=>d.classList.toggle("on",d.dataset.t==t));
+  const share=`まよまよ先生の「書く仕事4タイプ診断」をやってみました。
+
+私は「${r.name}」でした！
+
+　印税作家タイプ → Kindle作家向き
+　依頼が来るライタータイプ → 執筆代行・案件向き
+　教える先生タイプ → 講座・出版プロデュース向き
+　本を持つ専門家タイプ → 本業×出版向き
+
+自分の入口、見つけた！ #書く仕事診断`;
+  document.getElementById("share").textContent=share;
+  document.getElementById("xbtn").onclick=()=>window.open("https://x.com/intent/post?text="+encodeURIComponent(share),"_blank");
+  go("result");
+}
+function copyText(id){navigator.clipboard.writeText(document.getElementById(id).textContent).then(()=>alert("コピーしました"));}
+</script>
+</body>
+</html>
